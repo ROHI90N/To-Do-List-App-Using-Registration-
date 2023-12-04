@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block title %}
+Student Flask App with CRUD
+{% endblock %}
+{% block content %}
+    <h1>Welcome to To-Do List Application!</h1>
+    {% if 'user_id' in the session %}
+        <p>Hello, User ID: {{ session['user_id'] }}</p>
+        <p><a href="{{ utl_for('logout')}}">Logout</a></p>
+    {% else %}
+        <p>You are not logged in, <a href="{{ url_for('login') }}">Login</a> or <a href="{{ url_for('register') }}">Register</a>,</p>
+    {% endif %}
+{% endblock %}

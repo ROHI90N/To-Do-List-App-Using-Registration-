@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block title %}
+Add New Student
+{% endblock %}
+{% block content %}
+    <style>
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            color: #333;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+        <form action="{{ url_for('addrec') }}" method="POST">
+            <h3>Please Add the New Task:</h3>
+            Task Name:<br>
+            <input type="text" name="task" placeholder="Enter your Task Name"/><br>
+
+            Task Content:<br>
+            <textarea name="task_content" placeholder="Enter your Task Content"></textarea><br>
+
+            Priority:
+            <select name="prio">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+            <br>
+            </br>
+            Due Date:<br>
+            <input type="date" name="dd" /><br>
+
+            <input type="submit" value="Submit" /><br>
+        </form>
+{% endblock %}

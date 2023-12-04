@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+{% block title %}
+List All Tasks
+{% endblock %}
+{% block content %}
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        form {
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .delete-btn, .update-btn {
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .delete-btn {
+            background-color: #d9534f;
+        }
+
+        .update-btn {
+            background-color: #5cb85c;
+        }
+    </style>
+
+        <table border="3px">
+            <thead>
+                <td><strong>Task ID</strong></td>
+                <td><strong>Task Name</strong></td>
+                <td><strong>Task Content</strong></td>
+                <td><strong>Priority</strong></td>
+                <td><strong>Due Date</strong></td>
+                <td></td>
+                <td></td>
+            </thead>
+
+            {% for row in rows %}
+            <tr>
+                <td>{{ row["rowid"] }}</td>
+                <td>{{ row["task"] }}</td>
+                <td>{{ row["task_content"]}}</td>
+                <td>{{ row["prio"] }}</td>
+                <td>{{ row["dd"] }}</td>
+                <td>
+                    <form action="{{url_for('edit', row_id=row['rowid'])}}" method="POST">
+                        <button type="submit" value="Update-btn">
+                            <i class="fa fa-pencil-alt"></i> Update
+                        </button>
+                    </form> 
+                </td>
+                <td>
+                    <form onsubmit="return confirm('Are you sure you want to DELETE this task from the Database?');" action="{{ url_for('delete') }}" method="POST">
+                        <input type="hidden" name="id" value="{{ row['rowid'] }}">
+                        <button type="submit" class="delete-btn">
+                            <i class="fa fa-trash"></i> Delete
+                        </button>
+                    </form> 
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="/">Go to the Home Page</a>
+{% endblock %}
